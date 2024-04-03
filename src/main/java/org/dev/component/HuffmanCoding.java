@@ -5,39 +5,33 @@ import java.util.*;
  * Created by EXCaster on 2024/4/1
  */
 public class HuffmanCoding {
-    static class HuffmanNode {
+    s static class HuffmanNode {
         int frequency;
         char c;
         HuffmanNode left;
         HuffmanNode right;
-    }
 
-    static class HuffmanComparator implements Comparator<HuffmanNode> {
-        public int compare(HuffmanNode node1, HuffmanNode node2) {
-            return Integer.compare(node1.frequency, node2.frequency);
+        HuffmanNode(char c, int frequency) {
+            this.c = c;
+            this.frequency = frequency;
+        }
+
+        HuffmanNode(int frequency, HuffmanNode left, HuffmanNode right) {
+            this.frequency = frequency;
+            this.left = left;
+            this.right = right;
         }
     }
-    
+
     public static HuffmanNode buildTree(Map<Character, Integer> freq) {
-        PriorityQueue<HuffmanNode> queue = new PriorityQueue<>(new HuffmanComparator());
+        PriorityQueue<HuffmanNode> queue = new PriorityQueue<>(Comparator.comparingInt(node -> node.frequency));
 
-        for (Map.Entry<Character, Integer> entry : freq.entrySet()) {
-            HuffmanNode hn = new HuffmanNode();
-            hn.c = entry.getKey();
-            hn.frequency = entry.getValue();
-            hn.left = null;
-            hn.right = null;
-            queue.add(hn);
-        }
+        freq.forEach((c, frequency) -> queue.offer(new HuffmanNode(c, frequency)));
 
         while (queue.size() > 1) {
-            HuffmanNode x = queue.poll();
-            HuffmanNode y = queue.poll();
-            HuffmanNode sum = new HuffmanNode();
-            sum.frequency = x.frequency + y.frequency;
-            sum.left = x;
-            sum.right = y;
-            queue.add(sum);
+            HuffmanNode left = queue.poll();
+            HuffmanNode right = queue.poll();
+            queue.offer(new HuffmanNode(left.frequency + right.frequency, left, right));
         }
 
         return queue.poll();
