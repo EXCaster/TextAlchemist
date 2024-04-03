@@ -65,7 +65,7 @@ public class HuffmanCoding {
     }
 
     public static void main(String[] args) {
-        String test = "this is an example for huffman encoding";
+        String test = UUID.randomUUID().toString();
 
         Map<Character, Integer> freq = new HashMap<>();
         for (char c : test.toCharArray()) {
