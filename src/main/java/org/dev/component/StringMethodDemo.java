@@ -9,45 +9,28 @@ import java.util.UUID;
  */
 
 public class StringMethodDemo {
-    public static void main(String[] args) {
+   public static void main(String[] args) {
         String str1 = UUID.randomUUID().toString();
-        String str2 = "| by StringMethodDemo";
-
-        // length()
-        System.out.println("Length of str1: " + str1.length());
-
-        // trim()
-        System.out.println("Trimmed str1: '" + str1.trim() + "'");
-
-        // charAt()
-        System.out.println("Character at index 3 in str1: " + str1.charAt(3));
-
-        // indexOf()
-        System.out.println("Index of 'M' in str2: " + str2.indexOf('M'));
-        System.out.println("Index of 'Method' in str2: " + str2.indexOf("Method"));
-
-        // substring()
-        System.out.println("Substring of str1 from index 7: '" + str1.substring(7) + "'");
-        System.out.println("Substring of str1 from index 7 to 12: '" + str1.substring(7, 12) + "'");
-
-        // concat()
+        String str2 = "    | by StringMethodDemo    ";
+        StringBuilder output = new StringBuilder();
+        output.append("Length of str1: ").append(str1.length()).append("\n");
+        output.append("Character at index 3 in str1: ").append(str1.charAt(3)).append("\n");
+        output.append("Index of 'M' in str2: ").append(str2.indexOf('M')).append("\n");
+        output.append("Index of 'Method' in str2: ").append(str2.indexOf("Method")).append("\n");
+        output.append("Substring of str1 from index 7: '").append(str1.substring(7)).append("'\n");
+        output.append("Substring of str1 from index 7 to 12: '").append(str1, 7, 12).append("'\n");
         String str3 = str1.concat(str2);
-        System.out.println("Concatenated string: '" + str3 + "'");
-
-        // replace()
+        output.append("Concatenated string: '").append(str3).append("'\n");
         String str4 = str2.replace("by", "to");
-        System.out.println("Replaced string: '" + str4 + "'");
-
-        // split()
+        output.append("Replaced string: '").append(str4).append("'\n");
         String[] words = str2.split(" ");
-        System.out.println("Split str2 into array: " + Arrays.toString(words));
+        output.append("Split str2 into array: ").append(Arrays.toString(words)).append("\n");
+        output.append("Lower case of str2: '").append(str2.toLowerCase()).append("'\n");
+        output.append("Upper case of str1: '").append(str1.toUpperCase()).append("'\n");
+        output.append("str1 equals str4: ").append(str1.equals(str4)).append("\n");
+        output.append("str1 equalsIgnoreCase str4: ").append(str1.equalsIgnoreCase(str4)).append("\n");
+        output.append("Trimmed str2: '").append(str2.trim()).append("'\n");
 
-        // toLowerCase() and toUpperCase()
-        System.out.println("Lower case of str2: '" + str2.toLowerCase() + "'");
-        System.out.println("Upper case of str1: '" + str1.toUpperCase() + "'");
-
-        // equals() and equalsIgnoreCase()
-        System.out.println("str1 equals str4: " + str1.equals(str4));
-        System.out.println("str1 equalsIgnoreCase str4: " + str1.equalsIgnoreCase(str4));
+        System.out.println(output.toString());
     }
 }
