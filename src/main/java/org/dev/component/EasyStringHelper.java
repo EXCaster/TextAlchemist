@@ -12,15 +12,7 @@ import java.util.UUID;
  */
 public class EasyStringHelper {
     public static String reverseString(String str) {
-        Stack<Character> stack = new Stack<>();
-        for (char c : str.toCharArray()) {
-            stack.push(c);
-        }
-        StringBuilder reversed = new StringBuilder();
-        while (!stack.isEmpty()) {
-            reversed.append(stack.pop());
-        }
-        return reversed.toString();
+        return new StringBuilder(str).reverse().toString();
     }
 
     public static String[] splitAndSort(String str) {
@@ -34,11 +26,17 @@ public class EasyStringHelper {
         return dateFormat.format(date);
     }
 
+    public static String removeDuplicates(String str) {
+        return Arrays.stream(str.split("")).distinct().collect(Collectors.joining());
+    }
+
     public static void main(String[] args) {
         String originalString = UUID.randomUUID().toString();
+        System.out.println("originalString: " + originalString);
         String reversedString = EasyStringHelper.reverseString(originalString);
         System.out.println("Reversed String: " + reversedString);
-
+        String removeDuplicates = removeDuplicates(originalString);
+        System.out.println("removeDuplicates String: " + removeDuplicates);
         String sentence = "the quick brown fox jumps over the lazy dog";
         String[] sortedWords = EasyStringHelper.splitAndSort(sentence);
         System.out.println("Sorted Words: " + Arrays.toString(sortedWords));
